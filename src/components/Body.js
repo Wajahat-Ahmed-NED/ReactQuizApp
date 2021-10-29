@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 export default function Body() {
     const [num, setNum] = useState(0)
@@ -69,8 +71,8 @@ export default function Body() {
                         questions[num].ans.map((e, i) => {
                             return (
                                 <div className="col-md-6" >
-                                    <button key={i} onClick={() => handleClick(i)} className="btn btn-outline-primary" style={{ width: '400px', margin: '20px' }}>
-                                        {e}</button>
+                                    <Button key={i} onClick={() => handleClick(i)} variant="contained" style={{ width: '400px', margin: '20px' }}>
+                                        {e}</Button>
                                 </div>
                             )
                         })
