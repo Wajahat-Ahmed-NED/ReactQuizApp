@@ -2,3 +2,15 @@ body{
     background: rgb(2,0,36);
 background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,0,108,1) 0%, rgba(0,212,255,1) 96%);
 }
+
+@media screen and (min-width: 1115px) {
+    .btn {columns: md -12px;}
+    #main {margin-left: 216px;}
+  }
+
+
+@media (max-width:994px){
+    .btn{
+        columns: md -12px;
+    }
+}

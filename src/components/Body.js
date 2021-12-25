@@ -81,26 +81,26 @@ export default function Body() {
 
             <div className="container d-flex justify-content-between">
 
-            
-            <div className="container my-2 " style={{display:'inline-block'}}>
 
-                <select id="select" className=" form-select " style={{ width: 'auto' }} onChange={(e) => {
-                    setLevel(e.target.value)
-                    // setOpt(false)
-                    handleSelect()
-                }}>
-                    <option value="" selected>Level of difficulty</option>
-                    <option >Easy</option>
-                    <option  >Medium</option>
-                    <option >Hard</option>
+                <div className="container my-2 " style={{ display: 'inline-block' }}>
 
-                </select>
+                    <select id="select" className=" form-select " style={{ width: 'auto' }} onChange={(e) => {
+                        setLevel(e.target.value)
+                        // setOpt(false)
+                        handleSelect()
+                    }}>
+                        <option value="" selected>Level of difficulty</option>
+                        <option >Easy</option>
+                        <option  >Medium</option>
+                        <option >Hard</option>
+
+                    </select>
                 </div>
-                
+
                 <div className="container ">
 
-                
-                {/* <select id="select" className=" form-select my-2"  onChange={(e) => {
+
+                    {/* <select id="select" className=" form-select my-2"  onChange={(e) => {
                     setLevel(e.target.value)
                     // setOpt(false)
                     handleSelect()
@@ -112,10 +112,10 @@ export default function Body() {
 
                 </select> */}
                 </div>
-                </div>
-                
+            </div>
 
-                <h2 style={{ color: 'white' }} className='mt-3'>{level ? level + " Level" : 'Mixed Questions'}</h2>
+
+            <h2 style={{ color: 'white' }} className='mt-3'>{level ? level + " Level" : 'Mixed Questions'}</h2>
 
 
 
@@ -141,7 +141,7 @@ export default function Body() {
                                                 info[num]?.incorrect_answers.map((e, i) => {
                                                     return (
                                                         <div className="col-md-6" >
-                                                            <Button key={i} onClick={() => handleClick(i)} variant="contained" style={{ width: '400px', margin: '20px' }}>
+                                                            <Button className="p-1"variant="contained" key={i} onClick={() => handleClick(i)}  style={{ width: '130px', margin: '20px' }}>
                                                                 {e}</Button>
                                                         </div>
                                                     )
@@ -149,11 +149,12 @@ export default function Body() {
 
                                             }
                                             <div className="col-md-6">
-                                                <Button onClick={() => handleClick('ans')} variant="contained" style={{ width: '400px', margin: '20px' }}>
+                                                <Button  className="p-1" variant="contained"onClick={() => handleClick('ans')}  style={{ width: '130px', margin: '20px' }}>
                                                     {info[num]?.correct_answer} </Button>
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 </>)
                         }
                         {
