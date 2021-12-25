@@ -13,36 +13,44 @@ export default function Body() {
     const [level, setLevel] = useState('')
     const [info, setInfo] = useState([])
     const [loader, setLoader] = useState(false)
+    const [opt, setOpt] = useState(false)
 
 
 
 
     const getData = () => {
         setLoader(true)
-        const api = `https://opentdb.com/api.php?amount=10&category=18&difficulty=${level.length!==0?level.toLowerCase():''}&type=multiple`
+        const api = `https://opentdb.com/api.php?amount=10&category=18&difficulty=${level.length !== 0 ? level.toLowerCase() : ''}&type=multiple`
         axios.get(api).then((res) => {
             const inf = res.data.results
             console.log(inf)
             setInfo(inf)
             setLoader(false)
-            
+
         })
             .catch((err) => console.log(err))
 
     }
 
     useEffect(() => {
-        
+
 
         getData()
-        
-    }, [ ,level])
+
+    }, [, level])
 
 
+    const handleSelect = () => {
+        setNum(0)
+        setMarks(0)
+        setNext(1)
+        setResult(false)
+    }
 
     const handleClick = (sor) => {
         // let a=e.target.value
         // console.log(a)
+        // setOpt(false)
         setNext(next + 1)
         if (next === info.length) {
             setResult(true)
@@ -70,60 +78,91 @@ export default function Body() {
     return (
         <>
 
-            <div className="container my-2 ">
-               
-                <select id="select"  className=" form-select " style={{width:'auto'}} onChange={(e)=>setLevel(e.target.value)}>
-                    <option value="">Level of difficulty</option>
-                    <option >Easy</option>
-                    <option selected >Medium</option>
-                    <option >Hard</option>
-                    
-                </select>
-                <h2 style={{color:'white'}}>{level?level+" Level" : 'Mixed Questions'}</h2>
 
-            </div>
+            <div className="container d-flex justify-content-between">
 
-
-        {
-            loader ?<Spinner/>:
-        
-            <div className="container my-5 p-5 shadow p-3 mb-5 bg-white rounded" style={myStyle}>
-                {
-                    result ? <>
-                        <h1>You scored {marks}/{info.length} marks</h1> </> :
-
-                        (<>
-                            <h3>Q{num + 1}) &nbsp;&nbsp;&nbsp;
-                                {info[num]?.question}
-                            </h3>
-                            <div className="container my-5 p-3 shadow-lg p-3 mb-5 bg-white rounded" style={myStyle}>
-                                <div className="row">
-                                    {
-                                        info[num]?.incorrect_answers.map((e, i) => {
-                                            return (
-                                                <div className="col-md-6" >
-                                                    <Button key={i} onClick={() => handleClick(i)} variant="contained" style={{ width: '400px', margin: '20px' }}>
-                                                        {e}</Button>
-                                                </div>
-                                            )
-                                        })
-
-                                    }
-                                    <div className="col-md-6">
-                                        <Button onClick={() => handleClick('ans')} variant="contained" style={{ width: '400px', margin: '20px' }}>
-                                            {info[num]?.correct_answer} </Button>
-                                    </div>
-                                </div>
-                            </div>
-                        </>)
-                }
-                {
-                    result ? <button className="btn btn-secondary" onClick={() => {
-                        window.location.reload()
-                    }}> Start Again</button> : ""
-                }
-            </div >
             
+            <div className="container my-2 " style={{display:'inline-block'}}>
+
+                <select id="select" className=" form-select " style={{ width: 'auto' }} onChange={(e) => {
+                    setLevel(e.target.value)
+                    // setOpt(false)
+                    handleSelect()
+                }}>
+                    <option value="" selected>Level of difficulty</option>
+                    <option >Easy</option>
+                    <option  >Medium</option>
+                    <option >Hard</option>
+
+                </select>
+                </div>
+                
+                <div className="container ">
+
+                
+                {/* <select id="select" className=" form-select my-2"  onChange={(e) => {
+                    setLevel(e.target.value)
+                    // setOpt(false)
+                    handleSelect()
+                }}>
+                    <option value="" selected>Category</option>
+                    <option value='18'>Computer Science</option>
+                    <option  value="19">Maths</option>
+                    <option >Hard</option>
+
+                </select> */}
+                </div>
+                </div>
+                
+
+                <h2 style={{ color: 'white' }} className='mt-3'>{level ? level + " Level" : 'Mixed Questions'}</h2>
+
+
+
+            {
+                loader ? <Spinner /> :
+
+                    <div className="container my-5 p-5 shadow p-3 mb-5 bg-white rounded" style={myStyle}>
+                        {
+                            result ? <>
+                                <h1>You scored {marks}/{info.length} marks</h1>
+                                {
+                                    marks >= 5 ? <h3>You are Passed</h3> : <h3>Please do more practice (Failed) </h3>
+                                }
+                            </> :
+
+                                (<>
+                                    <h3>Q{num + 1}/{info.length}) &nbsp;&nbsp;&nbsp;
+                                        {info[num]?.question}
+                                    </h3>
+                                    <div className="container my-5 p-3 shadow-lg p-3 mb-5 bg-white rounded" style={myStyle}>
+                                        <div className="row">
+                                            {
+                                                info[num]?.incorrect_answers.map((e, i) => {
+                                                    return (
+                                                        <div className="col-md-6" >
+                                                            <Button key={i} onClick={() => handleClick(i)} variant="contained" style={{ width: '400px', margin: '20px' }}>
+                                                                {e}</Button>
+                                                        </div>
+                                                    )
+                                                })
+
+                                            }
+                                            <div className="col-md-6">
+                                                <Button onClick={() => handleClick('ans')} variant="contained" style={{ width: '400px', margin: '20px' }}>
+                                                    {info[num]?.correct_answer} </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>)
+                        }
+                        {
+                            result ? <button className="btn btn-secondary" onClick={() => {
+                                handleSelect()
+                            }}> Start Again</button> : ""
+                        }
+                    </div >
+
             }
         </>
     )
