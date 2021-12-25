@@ -33,9 +33,9 @@ export default function Navbar(props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       
-      <AppBar position="static" color="secondary">
+      <AppBar position="static" color="primary">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -43,8 +43,8 @@ export default function Navbar(props) {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          </IconButton> */}
+          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }} className="my-3">
             {props.title}
           </Typography>
           {auth && (
@@ -77,6 +77,7 @@ export default function Navbar(props) {
                 {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem> */}
               </Menu>
+              
             </div>
           )}
         </Toolbar>

@@ -6,7 +6,7 @@ import Body from './components/Body';
 function App() {
   return (
     <div className="App">
-      <Navbar title="Wajahat Quiz App"/>
+      <Navbar title=" Quiz App"/>
       
       <Body/>
     </div>
