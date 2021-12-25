@@ -17,24 +17,22 @@ export default function Body() {
 
 
 
-    const getData = () => {
-        setLoader(true)
-        const api = `https://opentdb.com/api.php?amount=10&category=18&difficulty=${level.length !== 0 ? level.toLowerCase() : ''}&type=multiple`
-        axios.get(api).then((res) => {
-            const inf = res.data.results
-            console.log(inf)
-            setInfo(inf)
-            setLoader(false)
 
-        })
-            .catch((err) => console.log(err))
-
-    }
 
     useEffect(() => {
-
+        const getData = () => {
+            setLoader(true)
+            const api = `https://opentdb.com/api.php?amount=10&category=18&difficulty=${level.length !== 0 ? level.toLowerCase() : ''}&type=multiple`
+            axios.get(api).then((res) => {
+                const inf = res.data.results
+                setInfo(inf)
+                setLoader(false)
+    
+            })
+                .catch((err) => console.log(err))
+    
+        }
         getData()
-
     }, [, level])
 
 
@@ -77,8 +75,8 @@ export default function Body() {
                     <select id="select" className=" form-select " style={{ width: 'auto' }} onChange={(e) => {
                         setLevel(e.target.value)
                         handleSelect()
-                    }}>
-                        <option value="" selected>Level of difficulty</option>
+                    }} defaultValue={'DEFAULT'}>
+                        <option  value="DEFAULT" disabled>Level of difficulty</option>
                         <option >Easy</option>
                         <option  >Medium</option>
                         <option >Hard</option>
@@ -119,7 +117,7 @@ export default function Body() {
 
                                             }
                                             <div className="col-md-6">
-                                                <Button className="p-1" variant="contained" onClick={() => handleClick('ans')} style={{ width: '130px', margin: '20px' }}>
+                                                <Button className="p-1" variant="contained" onClick={() => handleClick('ans')} style={{ width: '130px', margin: '20px' }} key={4}>
                                                     {info[num]?.correct_answer} </Button>
                                             </div>
                                         </div>

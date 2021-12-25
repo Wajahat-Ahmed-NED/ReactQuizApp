@@ -1,30 +1,14 @@
-// import React from 'react'
 import PropTypes from 'prop-types'
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
 export default function Navbar(props) {
-  const [auth, setAuth] = React.useState(true);
+  const auth=true;
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -35,30 +19,11 @@ export default function Navbar(props) {
       
       <AppBar position="static" color="primary">
         <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
           <Typography variant="h4" component="div" sx={{ flexGrow: 1 }} className="my-3">
             {props.title}
           </Typography>
           {auth && (
             <div>
-              {/* <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton> */}
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -74,8 +39,6 @@ export default function Navbar(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem> */}
               </Menu>
               
             </div>
@@ -86,25 +49,13 @@ export default function Navbar(props) {
   );
 }
 
-// export default function Navbar(props) {
-    
-//     return (
-//         <nav className="navbar navbar-expand-lg navbar-dark bg-dark  "  id="nav">
-//             <div className="container-fluid ">
-//                 <a className="navbar-brand text-justify" href="/">{props.title}</a>
-//                 {/* <h2 className="navbar-brand text-justify">{props.title}</h2> */}
-//             </div>
-//         </nav>
-//     )
-// }
 
 Navbar.propTypes = {
     title: PropTypes.string.isRequired,
     aboutText: PropTypes.string
-    // aboutText : PropTypes.string,
+
 }
 
 Navbar.defaultProps = {
-    // title:"Set Title Here",
     aboutText: "About Text here"
 }
