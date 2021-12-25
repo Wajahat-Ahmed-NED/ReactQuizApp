@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import './Body.css'
@@ -13,7 +12,7 @@ export default function Body() {
     const [level, setLevel] = useState('')
     const [info, setInfo] = useState([])
     const [loader, setLoader] = useState(false)
-    const [opt, setOpt] = useState(false)
+
 
 
 
@@ -34,7 +33,6 @@ export default function Body() {
 
     useEffect(() => {
 
-
         getData()
 
     }, [, level])
@@ -48,19 +46,14 @@ export default function Body() {
     }
 
     const handleClick = (sor) => {
-        // let a=e.target.value
-        // console.log(a)
-        // setOpt(false)
+
         setNext(next + 1)
         if (next === info.length) {
             setResult(true)
         }
-        // let a = info[num].correct_answer
-        // console.log(questions[num].ans.indexOf(a))
-        // if (questions[num].correctAns===)
-        // let cor = info[num].incorrect_answers[sor]
+
         if (sor === 'ans') {
-            // alert("correct")
+
             let newMarks = marks + 1;
             setMarks(newMarks)
         }
@@ -80,44 +73,21 @@ export default function Body() {
 
 
             <div className="container d-flex justify-content-between">
-
-
-                <div className="container my-2 " style={{ display: 'inline-block' }}>
-
+                <div className="container mt-4 mb-2 " style={{ display: 'inline-block' }}>
                     <select id="select" className=" form-select " style={{ width: 'auto' }} onChange={(e) => {
                         setLevel(e.target.value)
-                        // setOpt(false)
                         handleSelect()
                     }}>
                         <option value="" selected>Level of difficulty</option>
                         <option >Easy</option>
                         <option  >Medium</option>
                         <option >Hard</option>
-
                     </select>
-                </div>
-
-                <div className="container ">
-
-
-                    {/* <select id="select" className=" form-select my-2"  onChange={(e) => {
-                    setLevel(e.target.value)
-                    // setOpt(false)
-                    handleSelect()
-                }}>
-                    <option value="" selected>Category</option>
-                    <option value='18'>Computer Science</option>
-                    <option  value="19">Maths</option>
-                    <option >Hard</option>
-
-                </select> */}
                 </div>
             </div>
 
 
             <h2 style={{ color: 'white' }} className='mt-3'>{level ? level + " Level" : 'Mixed Questions'}</h2>
-
-
 
             {
                 loader ? <Spinner /> :
@@ -141,7 +111,7 @@ export default function Body() {
                                                 info[num]?.incorrect_answers.map((e, i) => {
                                                     return (
                                                         <div className="col-md-6" >
-                                                            <Button className="p-1"variant="contained" key={i} onClick={() => handleClick(i)}  style={{ width: '130px', margin: '20px' }}>
+                                                            <Button className="p-1" variant="contained" key={i} onClick={() => handleClick(i)} style={{ width: '130px', margin: '20px' }}>
                                                                 {e}</Button>
                                                         </div>
                                                     )
@@ -149,12 +119,12 @@ export default function Body() {
 
                                             }
                                             <div className="col-md-6">
-                                                <Button  className="p-1" variant="contained"onClick={() => handleClick('ans')}  style={{ width: '130px', margin: '20px' }}>
+                                                <Button className="p-1" variant="contained" onClick={() => handleClick('ans')} style={{ width: '130px', margin: '20px' }}>
                                                     {info[num]?.correct_answer} </Button>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </>)
                         }
                         {
