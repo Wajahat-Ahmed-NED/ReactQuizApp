@@ -27,7 +27,6 @@ export default function Body() {
                 const inf = res.data.results
                 setInfo(inf)
                 setLoader(false)
-    
             })
                 .catch((err) => console.log(err))
     
